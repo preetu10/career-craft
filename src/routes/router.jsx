@@ -10,6 +10,7 @@ import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoutes from "./PrivateRoute";
 import UserProfile from "../pages/Profile/UserProfile";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import ResumeMatcher from "../pages/ResumeMatcher/ResumeMatcher";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
         path: "user-profile",
         element: <UserProfile></UserProfile>,
       },
+      {
+        path:"resume-matcher",
+        element:<ResumeMatcher></ResumeMatcher>
+      }
     ],
   },
 ]);

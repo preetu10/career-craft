@@ -2,6 +2,7 @@ import React from "react";
 import useAuth from "../../customHooks/useAuth";
 import useAxiosSecure from "../../customHooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 export default function UserProfile() {
   const { user } = useAuth();
@@ -30,9 +31,9 @@ export default function UserProfile() {
         <div>
           <h1>Email: {userInfo?.email}</h1>
         </div>
-        <button className='btn mt-4 border-2 border-[#009999] text-[#006666] font-semibold text-lg rounded-md'>
-          Go to Resume Checker
-        </button>
+        <Link to="/dashboard/resume-matcher"><button className='btn mt-4 border-2 border-[#009999] text-[#006666] font-semibold text-lg rounded-md'>
+          Go to Resume Matcher
+        </button></Link>
       </div>
     </div>
   );
