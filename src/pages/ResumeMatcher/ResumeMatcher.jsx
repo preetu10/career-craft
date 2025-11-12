@@ -6,14 +6,15 @@ import useAxiosPublic from "../../customHooks/useAxiosPublic";
 export default function ResumeMatcher() {
    const [output, setOutput] = useState();
   const [jobDesc, setJobDesc] = useState("");
+  const [aiResponse, setAiResponse] = useState("");
   const [file, setFile] = useState(null);
   // const axiosSecure = useAxiosSecure();
   const axiosPublic=useAxiosPublic();
-  const handlePrompt = async () => {
-    const res = await axiosPublic.get("/prompts");
-    console.log(res.data);
-    setOutput(res?.data?.text);
-  };
+  // const handlePrompt = async () => {
+  //   const res = await axiosPublic.get("/prompts");
+  //   console.log(res.data);
+  //   setOutput(res?.data?.text);
+  // };
      const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile && selectedFile.type === "application/pdf") {
@@ -41,13 +42,14 @@ export default function ResumeMatcher() {
       });
       console.log(res)
     setOutput(res?.data?.percentage); // backend response
+    setAiResponse(res?.data?.aiAdvice)
     } catch (err) {
       console.error(err);
       toast.error("Something went wrong!");
     }
   };
    return (
-    <div className="flex flex-col items-center justify-center min-h-screen  px-6">
+    <div className="flex flex-col items-center justify-center min-h-screen  px-6 my-4">
       <div className="w-full max-w-3xl bg-white shadow-md rounded-2xl p-8 border border-[#b2d8d8]">
         {/* Title */}
         <h1 className="text-center text-[#006666] font-bold text-3xl mb-2">
@@ -104,14 +106,14 @@ export default function ResumeMatcher() {
           </button>
         </div>
          {/* Match Button */}
-        <div className="text-center mt-3">
+        {/* <div className="text-center mt-3">
           <button
             className="btn border-2 border-[#009999] text-[#006666] font-semibold text-lg rounded-md px-6 py-2 hover:bg-[#e0f2f2]"
             onClick={handlePrompt}
           >
             Test AI
           </button>
-        </div>
+        </div> */}
 
         {/* Output Section */}
         {output && (
@@ -122,7 +124,7 @@ export default function ResumeMatcher() {
           </div>
           <div className="mt-8 bg-[#f0fafa] p-4 rounded-lg border border-[#b2d8d8]">
             <h2 className="text-[#006666] font-semibold mb-2">AI Response:</h2>
-            <p className="text-gray-700 whitespace-pre-wrap">{output}</p>
+            <p className="text-gray-700 whitespace-pre-wrap">{aiResponse}</p>
           </div>
           </div>
         )}
